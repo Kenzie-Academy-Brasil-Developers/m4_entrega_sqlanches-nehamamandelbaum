@@ -34,11 +34,11 @@ WHERE clientes.nome ILIKE('Georgia');
 -- Atualização
 
 -- 1)
-
-
+UPDATE clientes SET lealdade = 48 WHERE clientes.nome ILIKE 'Georgia' ;
 
 -- Deleção
 
 -- 1)
+DELETE from clientes WHERE clientes.nome LIKE('Marcelo');
 
 
