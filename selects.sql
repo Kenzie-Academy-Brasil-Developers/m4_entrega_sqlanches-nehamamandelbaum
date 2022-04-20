@@ -44,6 +44,7 @@ COUNT(produtos_pedidos.produto_id)
 FROM produtos 
 JOIN produtos_pedidos 
 ON produtos_pedidos.produto_id = produtos.id 
-GROUP BY produtos.nome;
+GROUP BY produtos.nome
+ORDER BY produtos.nome;
 
 
