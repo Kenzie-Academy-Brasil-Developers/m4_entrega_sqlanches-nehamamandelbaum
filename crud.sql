@@ -5,13 +5,16 @@
 
 -- 1)
 INSERT INTO clientes(nome, lealdade) VALUES ('Georgia', 0);
--- 2)
-SELECT clientes.id FROM clientes WHERE clientes.nome = 'Georgia'; -- Query para pegar o ID do cliente que foi criado. 
-INSERT INTO pedidos(status, cliente_id) VALUES ('Recebido', 6);
+-- 2) 
+INSERT INTO pedidos(status, cliente_id) VALUES ('Recebido', (SELECT clientes.id FROM clientes WHERE clientes.nome = 'Georgia'));
 -- 3)
-SELECT * FROM produtos; -- Query para pegar os produtos e seus IDs para poder adicionar na tabela produtos_pedidos.
-SELECT * FROM pedidos WHERE pedidos.cliente_id = 6 --Query para pegar o ID do pedido que foi criado. 
-INSERT INTO produtos_pedidos (pedido_id, produto_id) VALUES (6, 1), (6, 2), (6, 6), (6, 8), (6, 8);
+INSERT INTO produtos_pedidos (pedido_id, produto_id) VALUES 
+((SELECT pedidos.id FROM pedidos WHERE pedidos.cliente_id = 6), (SELECT produtos.id FROM produtos WHERE produtos.nome LIKE('Big Serial'))), 
+ ((SELECT pedidos.id FROM pedidos WHERE pedidos.cliente_id = 6), (SELECT produtos.id FROM produtos WHERE produtos.nome LIKE('Varchapa'))), 
+ ((SELECT pedidos.id FROM pedidos WHERE pedidos.cliente_id = 6), (SELECT produtos.id FROM produtos WHERE produtos.nome LIKE('Fritas'))), 
+ ((SELECT pedidos.id FROM pedidos WHERE pedidos.cliente_id = 6), (SELECT produtos.id FROM produtos WHERE produtos.nome LIKE('Coca-Cola'))), 
+ ((SELECT pedidos.id FROM pedidos WHERE pedidos.cliente_id = 6), (SELECT produtos.id FROM produtos WHERE produtos.nome LIKE('Coca-Cola')));
+
 
 -- Leitura
 
